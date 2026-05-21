@@ -1782,7 +1782,7 @@
       <span class="cart-total-label">المجموع الكلي</span>
       <span class="cart-total-price" id="cart-total">0 درهم</span>
     </div>
-    <button class="btn-checkout" onclick="checkout()">إتمام الطلب عبر واتساب ↗</button>
+    <button class="btn-checkout" onclick="openOrderForm()">إتمام الطلب ↗</button>
   </div>
 </div>
 
@@ -1790,7 +1790,7 @@
 <div class="modal-backdrop" id="modal">
   <div class="modal">
     <button class="close-modal" onclick="closeModal()">×</button>
-    <div class="modal-img" id="modal-img" style="font-size:13px; font-weight:700; color:var(--gold);">—</div>
+    <div class="modal-img" id="modal-img" style="font-size:13px;font-weight:700;color:var(--gold);">—</div>
     <div class="modal-body">
       <div class="product-category" id="modal-cat">منتج</div>
       <h2 class="modal-title" id="modal-title">اسم المنتج</h2>
@@ -1809,10 +1809,164 @@
   </div>
 </div>
 
+<!-- ORDER FORM MODAL -->
+<div class="modal-backdrop" id="order-modal" style="z-index:600;">
+  <div class="modal" style="max-width:520px;">
+    <button class="close-modal" onclick="closeOrderForm()">×</button>
+    <div style="padding:32px;">
+      <div style="font-size:11px;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;">تأكيد الطلب</div>
+      <h2 style="font-size:22px;font-weight:900;color:var(--white);margin-bottom:24px;">بيانات العميل</h2>
+
+      <div id="order-items-summary" style="background:var(--black-soft);border:1px solid rgba(212,160,23,0.15);padding:16px;margin-bottom:24px;font-size:13px;color:var(--white-muted);line-height:1.9;"></div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">الاسم الكامل *</label>
+          <input type="text" id="order-name" placeholder="مثال: محمد العمراني" style="width:100%;background:var(--black-soft);border:1px solid rgba(212,160,23,0.25);color:var(--white);padding:12px 14px;font-family:Cairo,sans-serif;font-size:14px;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(212,160,23,0.25)'">
+        </div>
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">رقم الهاتف *</label>
+          <input type="tel" id="order-phone" placeholder="06XXXXXXXX" style="width:100%;background:var(--black-soft);border:1px solid rgba(212,160,23,0.25);color:var(--white);padding:12px 14px;font-family:Cairo,sans-serif;font-size:14px;outline:none;direction:ltr;text-align:right;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(212,160,23,0.25)'">
+        </div>
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">المدينة *</label>
+          <select id="order-city" style="width:100%;background:var(--black-soft);border:1px solid rgba(212,160,23,0.25);color:var(--white);padding:12px 14px;font-family:Cairo,sans-serif;font-size:14px;outline:none;appearance:none;">
+            <option value="">— اختر المدينة —</option>
+            <option>العرائش</option>
+            <option>طنجة</option>
+            <option>تطوان</option>
+            <option>القنيطرة</option>
+            <option>الرباط</option>
+            <option>الدار البيضاء</option>
+            <option>مراكش</option>
+            <option>فاس</option>
+            <option>مكناس</option>
+            <option>أكادير</option>
+            <option>أخرى</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">طريقة الاستلام *</label>
+          <select id="order-delivery" style="width:100%;background:var(--black-soft);border:1px solid rgba(212,160,23,0.25);color:var(--white);padding:12px 14px;font-family:Cairo,sans-serif;font-size:14px;outline:none;appearance:none;">
+            <option value="">— اختر —</option>
+            <option value="توصيل للمنزل">توصيل للمنزل</option>
+            <option value="استلام من المقر">استلام من مقر النادي</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">ملاحظات إضافية</label>
+          <textarea id="order-notes" placeholder="أي تفاصيل إضافية (رقم القميص، طلب خاص...)" rows="3" style="width:100%;background:var(--black-soft);border:1px solid rgba(212,160,23,0.25);color:var(--white);padding:12px 14px;font-family:Cairo,sans-serif;font-size:14px;outline:none;resize:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(212,160,23,0.25)'"></textarea>
+        </div>
+
+      </div>
+
+      <div id="order-error" style="color:#E53935;font-size:13px;font-weight:700;margin-top:12px;display:none;"></div>
+
+      <div style="display:flex;gap:12px;margin-top:24px;">
+        <button onclick="submitOrder()" style="flex:1;background:var(--gold);color:var(--black);border:none;padding:16px;font-family:Cairo,sans-serif;font-size:15px;font-weight:800;cursor:pointer;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));">تأكيد الطلب</button>
+        <button onclick="submitOrderWhatsapp()" style="flex:1;background:transparent;color:var(--white);border:1px solid rgba(212,160,23,0.3);padding:16px;font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer;">أو عبر واتساب</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER SUCCESS -->
+<div class="modal-backdrop" id="success-modal" style="z-index:700;">
+  <div class="modal" style="max-width:400px;text-align:center;">
+    <div style="padding:48px 32px;">
+      <div style="font-size:40px;font-weight:900;color:var(--gold);margin-bottom:16px;">✓</div>
+      <h2 style="font-size:24px;font-weight:900;color:var(--white);margin-bottom:12px;">تم استلام طلبك</h2>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:28px;">سنتواصل معك قريباً على الرقم المُدخل لتأكيد الطلب والترتيب للتوصيل.</p>
+      <button onclick="closeSuccess()" style="background:var(--gold);color:var(--black);border:none;padding:14px 36px;font-family:Cairo,sans-serif;font-size:15px;font-weight:800;cursor:pointer;">حسناً</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PAGE (hidden, shown via /admin hash) -->
+<div id="admin-page" style="display:none;position:fixed;inset:0;background:#0A0A0A;z-index:9999;overflow-y:auto;font-family:Cairo,sans-serif;direction:rtl;">
+  <div style="background:#141414;border-bottom:2px solid #D4A017;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">
+    <div>
+      <div style="font-size:11px;font-weight:800;color:#D4A017;letter-spacing:3px;text-transform:uppercase;">لوحة التحكم</div>
+      <h1 style="font-size:22px;font-weight:900;color:#FFFFFF;margin:4px 0 0;">طلبيات نادي منارة العرائش</h1>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <span id="admin-count" style="background:rgba(212,160,23,0.15);border:1px solid rgba(212,160,23,0.4);color:#D4A017;padding:6px 16px;font-size:13px;font-weight:700;">0 طلب</span>
+      <button onclick="clearOrders()" style="background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.4);color:#E53935;padding:8px 16px;font-family:Cairo,sans-serif;font-size:13px;font-weight:700;cursor:pointer;">حذف الكل</button>
+      <button onclick="exportCSV()" style="background:rgba(212,160,23,0.1);border:1px solid rgba(212,160,23,0.4);color:#D4A017;padding:8px 16px;font-family:Cairo,sans-serif;font-size:13px;font-weight:700;cursor:pointer;">تصدير CSV</button>
+      <button onclick="location.hash=''" style="background:transparent;border:1px solid rgba(255,255,255,0.15);color:#9A8A6A;padding:8px 16px;font-family:Cairo,sans-serif;font-size:13px;font-weight:700;cursor:pointer;">← خروج</button>
+    </div>
+  </div>
+
+  <!-- Stats row -->
+  <div id="admin-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:24px 40px 0;">
+  </div>
+
+  <!-- Orders table -->
+  <div style="padding:24px 40px 60px;">
+    <div id="admin-orders-container"></div>
+  </div>
+</div>
+
 <!-- WHATSAPP -->
-<a href="https://wa.me/212600000000" class="whatsapp-float" target="_blank" title="تواصل معنا على واتساب" style="font-size:13px; font-weight:900;">WA</a>
+<a href="https://wa.me/212600000000" class="whatsapp-float" target="_blank" title="تواصل معنا على واتساب" style="font-size:13px;font-weight:900;">WA</a>
+
+<style>
+  .admin-card {
+    background:#1A1A1A;
+    border:1px solid rgba(212,160,23,0.12);
+    margin-bottom:16px;
+    overflow:hidden;
+  }
+  .admin-card-header {
+    background:#141414;
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(212,160,23,0.1);
+    cursor:pointer;
+  }
+  .admin-card-header:hover { background:#1A1A1A; }
+  .admin-card-body { padding:20px;display:none; }
+  .admin-card-body.open { display:block; }
+  .admin-field { display:flex;gap:12px;margin-bottom:10px;font-size:14px; }
+  .admin-field-label { color:#9A8A6A;font-weight:700;min-width:140px; }
+  .admin-field-value { color:#E8E0CC;font-weight:600; }
+  .order-items-table { width:100%;border-collapse:collapse;margin-top:12px;font-size:13px; }
+  .order-items-table th { background:rgba(212,160,23,0.1);color:#D4A017;padding:8px 12px;text-align:right;font-weight:700;font-size:11px;letter-spacing:1px; }
+  .order-items-table td { padding:10px 12px;border-bottom:1px solid rgba(212,160,23,0.06);color:#E8E0CC; }
+  .status-badge { padding:4px 12px;font-size:11px;font-weight:800;letter-spacing:1px; }
+  .status-new { background:rgba(212,160,23,0.15);color:#D4A017;border:1px solid rgba(212,160,23,0.3); }
+  .status-done { background:rgba(76,175,80,0.15);color:#4CAF50;border:1px solid rgba(76,175,80,0.3); }
+  .status-cancelled { background:rgba(229,57,53,0.15);color:#E53935;border:1px solid rgba(229,57,53,0.3); }
+  .stat-card { background:#1A1A1A;border:1px solid rgba(212,160,23,0.1);padding:20px 24px; }
+  .stat-card .num { font-size:32px;font-weight:900;color:#D4A017; }
+  .stat-card .lbl { font-size:12px;color:#9A8A6A;font-weight:700;margin-top:4px; }
+</style>
 
 <script>
+  // =====================
+  // PRODUCTS CATALOG
+  // =====================
+  const PRODUCTS = [
+    { id: 'jersey-yellow', name: 'القميص الرسمي — الأصفر', price: 250, hasSizes: true },
+    { id: 'jersey-black',  name: 'قميص الملعب — الأسود',   price: 220, hasSizes: true },
+    { id: 'tshirt-fan',    name: 'تيشيرت المشجعين',         price: 150, hasSizes: true },
+    { id: 'kit-full',      name: 'طقم الملعب الكامل',        price: 420, hasSizes: true },
+    { id: 'cap',           name: 'قبعة النادي الرسمية',      price: 90,  hasSizes: false },
+    { id: 'scarf',         name: 'وشاح المشجعين',            price: 80,  hasSizes: false },
+    { id: 'bag',           name: 'الحقيبة الرياضية',         price: 180, hasSizes: false },
+  ];
+  const SIZES = ['XS','S','M','L','XL','XXL'];
+
+  // =====================
+  // CART
+  // =====================
   let cart = [];
   let cartOpen = false;
 
@@ -1822,24 +1976,22 @@
     document.getElementById('cart-overlay').classList.toggle('show', cartOpen);
   }
 
-  function addToCart(name, price) {
-    const existing = cart.find(i => i.name === name);
+  function addToCart(name, price, size) {
+    const key = name + (size ? '-' + size : '');
+    const existing = cart.find(i => i.key === key);
     if (existing) {
       existing.qty++;
     } else {
-      cart.push({ name, price, qty: 1 });
+      cart.push({ key, name, price, size: size || null, qty: 1 });
     }
     updateCart();
-    
-    const btn = event.target;
-    const orig = btn.textContent;
-    btn.textContent = '';
-    btn.style.background = '#4CAF50';
-    setTimeout(() => {
-      btn.textContent = orig;
-      btn.style.background = '';
-    }, 1200);
-
+    const btn = event && event.target;
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = 'تمت الاضافة';
+      btn.style.background = '#4CAF50';
+      setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 1200);
+    }
     if (!cartOpen) toggleCart();
   }
 
@@ -1851,22 +2003,19 @@
   function updateCart() {
     const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const count = cart.reduce((s, i) => s + i.qty, 0);
-    
     document.getElementById('cart-count').textContent = count;
     document.getElementById('cart-total').textContent = total + ' درهم';
-
     const container = document.getElementById('cart-items');
     if (cart.length === 0) {
       container.innerHTML = '<div class="cart-empty"><div class="icon" style="font-size:14px;font-weight:900;color:var(--gold);opacity:0.4;">[ ]</div><p>سلتك فارغة</p></div>';
       return;
     }
-
     container.innerHTML = cart.map((item, i) => `
       <div class="cart-item">
-        <div class="cart-item-img" style="font-size:11px; font-weight:700; color:var(--gold);">IMG</div>
+        <div class="cart-item-img" style="font-size:11px;font-weight:700;color:var(--gold);">IMG</div>
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-size">الكمية: ${item.qty}</div>
+          <div class="cart-item-size">${item.size ? 'المقاس: ' + item.size + ' · ' : ''}الكمية: ${item.qty}</div>
           <div class="cart-item-price">${item.price * item.qty} درهم</div>
         </div>
         <button class="cart-item-remove" onclick="removeFromCart(${i})">×</button>
@@ -1874,31 +2023,18 @@
     `).join('');
   }
 
-  function checkout() {
-    if (cart.length === 0) return;
-    const msg = cart.map(i => `• ${i.name} × ${i.qty} = ${i.price * i.qty} درهم`).join('\n');
-    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    const text = encodeURIComponent(`مرحباً، أريد طلب:\n${msg}\n\nالمجموع: ${total} درهم`);
-    window.open(`https://wa.me/212600000000?text=${text}`, '_blank');
-  }
+  // =====================
+  // PRODUCT MODAL
+  // =====================
+  let currentModalProduct = null;
 
-  function selectSize(btn) {
-    btn.closest('.sizes-row').querySelectorAll('.size-opt').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-
-  let modalProduct = { name: '', price: 0 };
-
-  function openModal(name, price, icon, desc) {
-    modalProduct = { name, price };
+  function openModal(id, name, price, desc) {
+    const prod = PRODUCTS.find(p => p.id === id) || { hasSizes: false };
+    currentModalProduct = { id, name, price };
     document.getElementById('modal-title').textContent = name;
     document.getElementById('modal-price').textContent = price + ' درهم';
-    document.getElementById('modal-img').textContent = icon;
+    document.getElementById('modal-img').textContent = '—';
     document.getElementById('modal-desc').textContent = desc;
-    document.getElementById('modal-add').onclick = () => {
-      addToCart(name, price);
-      closeModal();
-    };
     document.getElementById('modal').classList.add('open');
   }
 
@@ -1910,13 +2046,273 @@
     if (e.target === this) closeModal();
   });
 
-  // Scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
-  }, { threshold: 0.1 });
+  document.getElementById('modal-add').onclick = () => {
+    if (!currentModalProduct) return;
+    const activeSize = document.querySelector('#modal .size-opt.active');
+    addToCart(currentModalProduct.name, currentModalProduct.price, activeSize ? activeSize.textContent : null);
+    closeModal();
+  };
 
+  function selectSize(btn) {
+    btn.closest('.sizes-row').querySelectorAll('.size-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // =====================
+  // ORDER FORM
+  // =====================
+  function openOrderForm() {
+    if (cart.length === 0) { alert('سلتك فارغة'); return; }
+    // Summary
+    const summary = cart.map(i =>
+      `• ${i.name}${i.size ? ' ('+i.size+')' : ''} × ${i.qty} — ${i.price * i.qty} درهم`
+    ).join('\n');
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('order-items-summary').innerHTML =
+      summary.split('\n').map(l => `<div>${l}</div>`).join('') +
+      `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(212,160,23,0.15);font-weight:900;color:var(--gold);">المجموع: ${total} درهم</div>`;
+    document.getElementById('order-name').value = '';
+    document.getElementById('order-phone').value = '';
+    document.getElementById('order-city').value = '';
+    document.getElementById('order-delivery').value = '';
+    document.getElementById('order-notes').value = '';
+    document.getElementById('order-error').style.display = 'none';
+    document.getElementById('order-modal').classList.add('open');
+  }
+
+  function closeOrderForm() {
+    document.getElementById('order-modal').classList.remove('open');
+  }
+
+  document.getElementById('order-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeOrderForm();
+  });
+
+  function validateForm() {
+    const name = document.getElementById('order-name').value.trim();
+    const phone = document.getElementById('order-phone').value.trim();
+    const city = document.getElementById('order-city').value;
+    const delivery = document.getElementById('order-delivery').value;
+    if (!name) return 'الرجاء إدخال الاسم الكامل';
+    if (!phone || phone.length < 9) return 'الرجاء إدخال رقم هاتف صحيح';
+    if (!city) return 'الرجاء اختيار المدينة';
+    if (!delivery) return 'الرجاء اختيار طريقة الاستلام';
+    return null;
+  }
+
+  function buildOrderObject() {
+    return {
+      id: 'ORD-' + Date.now(),
+      date: new Date().toLocaleString('ar-MA'),
+      timestamp: Date.now(),
+      customer: {
+        name: document.getElementById('order-name').value.trim(),
+        phone: document.getElementById('order-phone').value.trim(),
+        city: document.getElementById('order-city').value,
+        delivery: document.getElementById('order-delivery').value,
+        notes: document.getElementById('order-notes').value.trim(),
+      },
+      items: cart.map(i => ({ name: i.name, size: i.size, qty: i.qty, price: i.price, total: i.price * i.qty })),
+      total: cart.reduce((s, i) => s + i.price * i.qty, 0),
+      status: 'جديد',
+    };
+  }
+
+  function saveOrder(order) {
+    const orders = JSON.parse(localStorage.getItem('manara_orders') || '[]');
+    orders.unshift(order);
+    localStorage.setItem('manara_orders', JSON.stringify(orders));
+  }
+
+  function submitOrder() {
+    const err = validateForm();
+    const errEl = document.getElementById('order-error');
+    if (err) { errEl.textContent = err; errEl.style.display = 'block'; return; }
+    errEl.style.display = 'none';
+    const order = buildOrderObject();
+    saveOrder(order);
+    cart = [];
+    updateCart();
+    closeOrderForm();
+    if (cartOpen) toggleCart();
+    document.getElementById('success-modal').classList.add('open');
+  }
+
+  function submitOrderWhatsapp() {
+    const err = validateForm();
+    const errEl = document.getElementById('order-error');
+    if (err) { errEl.textContent = err; errEl.style.display = 'block'; return; }
+    errEl.style.display = 'none';
+    const order = buildOrderObject();
+    saveOrder(order);
+    const items = order.items.map(i => `• ${i.name}${i.size ? ' ('+i.size+')' : ''} × ${i.qty} = ${i.total} درهم`).join('\n');
+    const msg = `مرحباً، أريد تأكيد طلب:\n\n${items}\n\nالمجموع: ${order.total} درهم\n\nالاسم: ${order.customer.name}\nالهاتف: ${order.customer.phone}\nالمدينة: ${order.customer.city}\nالاستلام: ${order.customer.delivery}${order.customer.notes ? '\nملاحظات: '+order.customer.notes : ''}`;
+    window.open('https://wa.me/212600000000?text=' + encodeURIComponent(msg), '_blank');
+    cart = [];
+    updateCart();
+    closeOrderForm();
+    if (cartOpen) toggleCart();
+  }
+
+  function closeSuccess() {
+    document.getElementById('success-modal').classList.remove('open');
+  }
+
+  // =====================
+  // ADMIN PAGE
+  // =====================
+  const ADMIN_HASH = 'admin';
+
+  function checkAdminRoute() {
+    const hash = location.hash.replace('#', '').toLowerCase();
+    if (hash === ADMIN_HASH) {
+      document.getElementById('admin-page').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      renderAdmin();
+    } else {
+      document.getElementById('admin-page').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+
+  window.addEventListener('hashchange', checkAdminRoute);
+  window.addEventListener('load', checkAdminRoute);
+
+  function getOrders() {
+    return JSON.parse(localStorage.getItem('manara_orders') || '[]');
+  }
+
+  function setOrderStatus(id, status) {
+    const orders = getOrders();
+    const o = orders.find(o => o.id === id);
+    if (o) { o.status = status; localStorage.setItem('manara_orders', JSON.stringify(orders)); renderAdmin(); }
+  }
+
+  function deleteOrder(id) {
+    const orders = getOrders().filter(o => o.id !== id);
+    localStorage.setItem('manara_orders', JSON.stringify(orders));
+    renderAdmin();
+  }
+
+  function clearOrders() {
+    if (!confirm('حذف جميع الطلبات؟ لا يمكن التراجع.')) return;
+    localStorage.removeItem('manara_orders');
+    renderAdmin();
+  }
+
+  function exportCSV() {
+    const orders = getOrders();
+    if (!orders.length) return;
+    const rows = [['رقم الطلب','التاريخ','الاسم','الهاتف','المدينة','الاستلام','المنتجات','المجموع','الحالة','ملاحظات']];
+    orders.forEach(o => {
+      const items = o.items.map(i => `${i.name}${i.size?'('+i.size+')':''} x${i.qty}`).join(' | ');
+      rows.push([o.id, o.date, o.customer.name, o.customer.phone, o.customer.city, o.customer.delivery, items, o.total + ' درهم', o.status, o.customer.notes || '']);
+    });
+    const csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g,'""') + '"').join(',')).join('\n');
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'manara-orders.csv'; a.click();
+  }
+
+  function renderAdmin() {
+    const orders = getOrders();
+    document.getElementById('admin-count').textContent = orders.length + ' طلب';
+
+    // Stats
+    const total = orders.reduce((s, o) => s + o.total, 0);
+    const newOrders = orders.filter(o => o.status === 'جديد').length;
+    const doneOrders = orders.filter(o => o.status === 'مكتمل').length;
+    document.getElementById('admin-stats').innerHTML = `
+      <div class="stat-card"><div class="num">${orders.length}</div><div class="lbl">إجمالي الطلبات</div></div>
+      <div class="stat-card"><div class="num">${newOrders}</div><div class="lbl">طلبات جديدة</div></div>
+      <div class="stat-card"><div class="num">${doneOrders}</div><div class="lbl">مكتملة</div></div>
+      <div class="stat-card"><div class="num">${total.toLocaleString('ar')}</div><div class="lbl">درهم — إجمالي المبيعات</div></div>
+    `;
+
+    const container = document.getElementById('admin-orders-container');
+    if (!orders.length) {
+      container.innerHTML = '<div style="text-align:center;padding:80px;color:#9A8A6A;font-size:16px;font-weight:700;">لا توجد طلبات بعد</div>';
+      return;
+    }
+
+    container.innerHTML = orders.map((o, idx) => {
+      const statusClass = o.status === 'جديد' ? 'status-new' : o.status === 'مكتمل' ? 'status-done' : 'status-cancelled';
+      const itemsRows = o.items.map(i => `
+        <tr>
+          <td>${i.name}</td>
+          <td>${i.size || '—'}</td>
+          <td style="text-align:center;">${i.qty}</td>
+          <td style="text-align:left;">${i.price} درهم</td>
+          <td style="text-align:left;font-weight:800;color:#D4A017;">${i.total} درهم</td>
+        </tr>
+      `).join('');
+
+      return `
+        <div class="admin-card">
+          <div class="admin-card-header" onclick="toggleAdminCard(${idx})">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:11px;font-weight:800;color:#9A8A6A;">${o.id}</span>
+              <span style="font-size:15px;font-weight:800;color:#FFFFFF;">${o.customer.name}</span>
+              <span style="font-size:13px;color:#9A8A6A;">${o.customer.phone}</span>
+              <span style="font-size:13px;color:#D4A017;font-weight:700;">${o.customer.city}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:16px;font-weight:900;color:#D4A017;">${o.total} درهم</span>
+              <span class="status-badge ${statusClass}">${o.status}</span>
+              <span style="color:#9A8A6A;font-size:13px;">${o.date}</span>
+            </div>
+          </div>
+          <div class="admin-card-body" id="admin-body-${idx}">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+              <div>
+                <div style="font-size:11px;font-weight:800;color:#D4A017;letter-spacing:2px;margin-bottom:12px;">بيانات العميل</div>
+                <div class="admin-field"><span class="admin-field-label">الاسم الكامل</span><span class="admin-field-value">${o.customer.name}</span></div>
+                <div class="admin-field"><span class="admin-field-label">رقم الهاتف</span><span class="admin-field-value" style="direction:ltr;">${o.customer.phone}</span></div>
+                <div class="admin-field"><span class="admin-field-label">المدينة</span><span class="admin-field-value">${o.customer.city}</span></div>
+                <div class="admin-field"><span class="admin-field-label">طريقة الاستلام</span><span class="admin-field-value">${o.customer.delivery}</span></div>
+                ${o.customer.notes ? `<div class="admin-field"><span class="admin-field-label">ملاحظات</span><span class="admin-field-value">${o.customer.notes}</span></div>` : ''}
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:800;color:#D4A017;letter-spacing:2px;margin-bottom:12px;">المنتجات المطلوبة</div>
+                <table class="order-items-table">
+                  <thead><tr><th>المنتج</th><th>المقاس</th><th style="text-align:center;">الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead>
+                  <tbody>${itemsRows}</tbody>
+                  <tfoot><tr><td colspan="4" style="padding:10px 12px;color:#9A8A6A;font-weight:700;">المجموع الكلي</td><td style="padding:10px 12px;font-weight:900;color:#D4A017;font-size:16px;">${o.total} درهم</td></tr></tfoot>
+                </table>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(212,160,23,0.1);">
+              <button onclick="setOrderStatus('${o.id}','جديد')" style="background:rgba(212,160,23,0.1);border:1px solid rgba(212,160,23,0.3);color:#D4A017;padding:8px 16px;font-family:Cairo,sans-serif;font-size:12px;font-weight:700;cursor:pointer;">جديد</button>
+              <button onclick="setOrderStatus('${o.id}','مكتمل')" style="background:rgba(76,175,80,0.1);border:1px solid rgba(76,175,80,0.3);color:#4CAF50;padding:8px 16px;font-family:Cairo,sans-serif;font-size:12px;font-weight:700;cursor:pointer;">مكتمل</button>
+              <button onclick="setOrderStatus('${o.id}','ملغى')" style="background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.3);color:#E53935;padding:8px 16px;font-family:Cairo,sans-serif;font-size:12px;font-weight:700;cursor:pointer;">ملغى</button>
+              <button onclick="whatsappOrder('${o.id}')" style="background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);color:#25D366;padding:8px 16px;font-family:Cairo,sans-serif;font-size:12px;font-weight:700;cursor:pointer;">تواصل واتساب</button>
+              <button onclick="deleteOrder('${o.id}')" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:#9A8A6A;padding:8px 16px;font-family:Cairo,sans-serif;font-size:12px;font-weight:700;cursor:pointer;margin-right:auto;">حذف</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function toggleAdminCard(idx) {
+    const body = document.getElementById('admin-body-' + idx);
+    body.classList.toggle('open');
+  }
+
+  function whatsappOrder(id) {
+    const o = getOrders().find(o => o.id === id);
+    if (!o) return;
+    const msg = `مرحباً ${o.customer.name}، شكراً على طلبك من متجر نادي منارة العرائش.\n\nتفاصيل طلبك:\n` +
+      o.items.map(i => `• ${i.name}${i.size?'('+i.size+')':''} × ${i.qty} = ${i.total} درهم`).join('\n') +
+      `\n\nالمجموع: ${o.total} درهم\nطريقة الاستلام: ${o.customer.delivery}\n\nسنتواصل معك قريباً.`;
+    window.open('https://wa.me/212' + o.customer.phone.replace(/^0/, '') + '?text=' + encodeURIComponent(msg), '_blank');
+  }
+
+  // =====================
+  // SCROLL ANIMATIONS
+  // =====================
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
