@@ -772,7 +772,7 @@
     gap: 14px;
   }
 
-  .banner-item::before { content: '⚽'; }
+  .banner-item::before { content: '◆'; font-size: 8px; }
 
   /* ===== FEATURES ROW ===== */
   .features-row {
@@ -1204,7 +1204,7 @@
 <body>
 
 <!-- TOPBAR -->
-<div class="topbar">🏆 شحن مجاني للطلبات فوق 300 درهم · موسم 2026/2027 · منتجات رسمية حصرية</div>
+<div class="topbar">شحن مجاني للطلبات فوق 300 درهم &nbsp;·&nbsp; موسم 2026/2027 &nbsp;·&nbsp; منتجات رسمية حصرية</div>
 
 <!-- NAVBAR -->
 <nav>
@@ -1346,22 +1346,22 @@
 <!-- FEATURES -->
 <div class="features-row">
   <div class="feature-item">
-    <span class="feature-icon">🚚</span>
+    <span class="feature-icon" style="font-size:24px; font-weight:900; color:var(--gold);">24H</span>
     <h4>توصيل سريع</h4>
     <p>خلال 24-48 ساعة</p>
   </div>
   <div class="feature-item">
-    <span class="feature-icon">✅</span>
+    <span class="feature-icon" style="font-size:20px; font-weight:900; color:var(--gold);">100%</span>
     <h4>منتجات رسمية</h4>
     <p>مرخصة من النادي</p>
   </div>
   <div class="feature-item">
-    <span class="feature-icon">🔄</span>
+    <span class="feature-icon" style="font-size:20px; font-weight:900; color:var(--gold);">14J</span>
     <h4>إرجاع مجاني</h4>
     <p>خلال 14 يوماً</p>
   </div>
   <div class="feature-item">
-    <span class="feature-icon">🔒</span>
+    <span class="feature-icon" style="font-size:20px; font-weight:900; color:var(--gold);">COD</span>
     <h4>دفع آمن</h4>
     <p>عند الاستلام</p>
   </div>
@@ -1435,8 +1435,8 @@
         </div>
 
         <div class="featured-actions">
-          <button class="btn-buy" onclick="addToCart('القميص الرسمي', 250)">أضف للسلة ⚽</button>
-          <button class="btn-wish">♡</button>
+          <button class="btn-buy" onclick="addToCart('القميص الرسمي', 250)">أضف للسلة</button>
+          <button class="btn-wish"></button>
         </div>
       </div>
     </div>
@@ -1453,7 +1453,7 @@
     <div class="products-grid" id="products-grid">
 
       <!-- Product 1 -->
-      <div class="product-card fade-up" onclick="openModal('قميص الملعب — الأسود', 220, '⚽', 'قميص الغسيل الاحتياطي باللون الأسود والذهبي، مصنوع من خامة مائة بالمائة بوليستر تقنية. تصميم عصري يعكس هوية نادي منارة العرائش.')">
+      <div class="product-card fade-up" onclick="openModal('قميص الملعب — الأسود', 220, '—', 'قميص الغسيل الاحتياطي باللون الأسود والذهبي، مصنوع من خامة مائة بالمائة بوليستر تقنية. تصميم عصري يعكس هوية نادي منارة العرائش.')">
         <div class="product-badge new">جديد</div>
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
@@ -1482,7 +1482,7 @@
       </div>
 
       <!-- Product 2 -->
-      <div class="product-card fade-up" onclick="openModal('تيشيرت المشجعين', 150, '👕', 'تيشيرت المشجعين الرسمي لنادي منارة العرائش، بشعار النادي مطبوع بجودة عالية. مناسب لجميع المناسبات ومباريات الفريق.')">
+      <div class="product-card fade-up" onclick="openModal('تيشيرت المشجعين', 150, '—', 'تيشيرت المشجعين الرسمي لنادي منارة العرائش، بشعار النادي مطبوع بجودة عالية. مناسب لجميع المناسبات ومباريات الفريق.')">
         <div class="product-badge sale">تخفيض</div>
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
@@ -1509,7 +1509,7 @@
       </div>
 
       <!-- Product 3 -->
-      <div class="product-card fade-up" onclick="openModal('طقم الملعب الكامل', 420, '👕', 'الطقم الكامل لنادي منارة العرائش يشمل القميص والشورت والجوارب الرسمية للموسم 2026/2027. الطقم المثالي للاعبين والمشجعين.')">
+      <div class="product-card fade-up" onclick="openModal('طقم الملعب الكامل', 420, '—', 'الطقم الكامل لنادي منارة العرائش يشمل القميص والشورت والجوارب الرسمية للموسم 2026/2027. الطقم المثالي للاعبين والمشجعين.')">
         <div class="product-badge">الأكثر مبيعاً</div>
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
@@ -1540,7 +1540,7 @@
       </div>
 
       <!-- Product 4 -->
-      <div class="product-card fade-up" onclick="openModal('قبعة النادي', 90, '🧢', 'قبعة رسمية لنادي منارة العرائش بالألوان الأسود والذهبي. مصنوعة من قطن عالي الجودة مع شعار النادي المطرز.')">
+      <div class="product-card fade-up" onclick="openModal('قبعة النادي', 90, '—', 'قبعة رسمية لنادي منارة العرائش بالألوان الأسود والذهبي. مصنوعة من قطن عالي الجودة مع شعار النادي المطرز.')">
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
           <svg width="180" height="160" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
@@ -1567,7 +1567,7 @@
       </div>
 
       <!-- Product 5 -->
-      <div class="product-card fade-up" onclick="openModal('وشاح المشجعين', 80, '🧣', 'وشاح رسمي بألوان نادي منارة العرائش الأصفر والأسود، بشعار النادي واسمه. مثالي للمباريات والمناسبات الرياضية.')">
+      <div class="product-card fade-up" onclick="openModal('وشاح المشجعين', 80, '—', 'وشاح رسمي بألوان نادي منارة العرائش الأصفر والأسود، بشعار النادي واسمه. مثالي للمباريات والمناسبات الرياضية.')">
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
           <svg width="180" height="160" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
@@ -1596,7 +1596,7 @@
       </div>
 
       <!-- Product 6 -->
-      <div class="product-card fade-up" onclick="openModal('حقيبة رياضية', 180, '🎽', 'حقيبة رياضية رسمية بشعار نادي منارة العرائش. مساحة واسعة مع جيوب متعددة. مثالية لحمل معدات التدريب والمباريات.')">
+      <div class="product-card fade-up" onclick="openModal('حقيبة رياضية', 180, '', 'حقيبة رياضية رسمية بشعار نادي منارة العرائش. مساحة واسعة مع جيوب متعددة. مثالية لحمل معدات التدريب والمباريات.')">
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
           <svg width="180" height="160" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
@@ -1636,7 +1636,7 @@
   <div class="testimonials-section">
     <div class="testimonials-grid">
       <div class="testimonial-card fade-up">
-        <div class="stars">★★★★★</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="testimonial-text">جودة القميص رائعة، خامة ممتازة والطباعة واضحة. وصلني في نفس اليوم! فخور بارتداء ألوان نادينا.</p>
         <div class="testimonial-author">
           <div class="author-avatar">أ</div>
@@ -1647,7 +1647,7 @@
         </div>
       </div>
       <div class="testimonial-card fade-up">
-        <div class="stars">★★★★★</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="testimonial-text">اشتريت الطقم الكامل لابني وهو سعيد جداً. السعر معقول والجودة عالية. ننصح به بشدة.</p>
         <div class="testimonial-author">
           <div class="author-avatar">ي</div>
@@ -1658,7 +1658,7 @@
         </div>
       </div>
       <div class="testimonial-card fade-up">
-        <div class="stars">★★★★☆</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
         <p class="testimonial-text">التصميم جميل جداً، خصوصاً سيلويت المدينة. أخيراً نادي يعبر عن هوية العرائش بشكل حقيقي.</p>
         <div class="testimonial-author">
           <div class="author-avatar">ه</div>
@@ -1690,7 +1690,7 @@
         </div>
         <div style="width: 1px; background: rgba(212,160,23,0.2);"></div>
         <div>
-          <div style="font-size: 36px; font-weight: 900; color: var(--gold);">🏆</div>
+          <div style="font-size: 24px; font-weight: 900; color: var(--gold);">رسمي</div>
           <div style="font-size: 12px; color: var(--text-muted); font-weight: 700;">قميص رسمي</div>
         </div>
         <div style="width: 1px; background: rgba(212,160,23,0.2);"></div>
@@ -1757,9 +1757,9 @@
   <div class="footer-bottom">
     <p>© 2026 <span>نادي منارة العرائش</span> — جميع الحقوق محفوظة</p>
     <div class="social-links">
-      <a href="#" class="social-link">📸</a>
-      <a href="#" class="social-link">📱</a>
-      <a href="#" class="social-link">💬</a>
+      <a href="#" class="social-link" style="font-size:11px; font-weight:700; width:auto; padding:0 10px;">IG</a>
+      <a href="#" class="social-link" style="font-size:11px; font-weight:700; width:auto; padding:0 10px;">TK</a>
+      <a href="https://wa.me/212600000000" class="social-link" style="font-size:11px; font-weight:700; width:auto; padding:0 10px;">WA</a>
     </div>
   </div>
 </footer>
@@ -1773,7 +1773,7 @@
   </div>
   <div class="cart-items" id="cart-items">
     <div class="cart-empty">
-      <div class="icon">🛒</div>
+      <div class="icon" style="font-size:14px; font-weight:900; color:var(--gold); opacity:0.4;">[ ]</div>
       <p>سلتك فارغة</p>
     </div>
   </div>
@@ -1790,7 +1790,7 @@
 <div class="modal-backdrop" id="modal">
   <div class="modal">
     <button class="close-modal" onclick="closeModal()">×</button>
-    <div class="modal-img" id="modal-img">⚽</div>
+    <div class="modal-img" id="modal-img" style="font-size:13px; font-weight:700; color:var(--gold);">—</div>
     <div class="modal-body">
       <div class="product-category" id="modal-cat">منتج</div>
       <h2 class="modal-title" id="modal-title">اسم المنتج</h2>
@@ -1804,13 +1804,13 @@
         <button class="size-opt" onclick="selectSize(this)">XL</button>
         <button class="size-opt" onclick="selectSize(this)">XXL</button>
       </div>
-      <button class="btn-buy" id="modal-add" style="width:100%;">أضف للسلة ⚽</button>
+      <button class="btn-buy" id="modal-add" style="width:100%;">أضف للسلة</button>
     </div>
   </div>
 </div>
 
 <!-- WHATSAPP -->
-<a href="https://wa.me/212600000000" class="whatsapp-float" target="_blank" title="تواصل معنا على واتساب">💬</a>
+<a href="https://wa.me/212600000000" class="whatsapp-float" target="_blank" title="تواصل معنا على واتساب" style="font-size:13px; font-weight:900;">WA</a>
 
 <script>
   let cart = [];
@@ -1833,7 +1833,7 @@
     
     const btn = event.target;
     const orig = btn.textContent;
-    btn.textContent = '✓';
+    btn.textContent = '';
     btn.style.background = '#4CAF50';
     setTimeout(() => {
       btn.textContent = orig;
@@ -1857,13 +1857,13 @@
 
     const container = document.getElementById('cart-items');
     if (cart.length === 0) {
-      container.innerHTML = '<div class="cart-empty"><div class="icon">🛒</div><p>سلتك فارغة</p></div>';
+      container.innerHTML = '<div class="cart-empty"><div class="icon" style="font-size:14px;font-weight:900;color:var(--gold);opacity:0.4;">[ ]</div><p>سلتك فارغة</p></div>';
       return;
     }
 
     container.innerHTML = cart.map((item, i) => `
       <div class="cart-item">
-        <div class="cart-item-img">⚽</div>
+        <div class="cart-item-img" style="font-size:11px; font-weight:700; color:var(--gold);">IMG</div>
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name}</div>
           <div class="cart-item-size">الكمية: ${item.qty}</div>
