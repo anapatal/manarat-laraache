@@ -368,10 +368,11 @@
   }
 
   .jersey-svg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 60px rgba(212,160,23,0.3));
+  }
 
   /* ===== SECTION COMMON ===== */
   section { position: relative; z-index: 1; }
@@ -608,6 +609,7 @@
   .featured-jersey {
     width: 320px;
     height: 380px;
+    object-fit: contain;
     position: relative;
     z-index: 2;
     filter: drop-shadow(0 10px 40px rgba(212,160,23,0.4));
@@ -1237,7 +1239,10 @@
   <div class="hero-lines"></div>
 
   <div class="hero-visual">
-    <img class="product-img" src="images/jersey-yellow.jpg" alt="القميص الرسمي">
+    <div class="jersey-mockup">
+      <div class="jersey-glow"></div>
+      <img class="jersey-svg" src="images/jersey-yellow.jpg" alt="القميص الرسمي">
+    </div>
   </div>
 
   <div class="hero-content">
@@ -1323,38 +1328,7 @@
   <div class="featured-section">
     <div class="featured-card fade-up">
       <div class="featured-visual">
-        <svg class="featured-jersey" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="fg2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#FFD600"/>
-              <stop offset="100%" style="stop-color:#D4A017"/>
-            </linearGradient>
-          </defs>
-          <path d="M55 38 L18 75 L36 84 L36 272 L244 272 L244 84 L262 75 L225 38 Q207 18 188 23 Q158 8 140 13 Q122 8 92 23 Q73 18 55 38Z" fill="url(#fg2)"/>
-          <path d="M102 23 Q140 3 178 23 Q164 47 140 49 Q116 47 102 23Z" fill="#0A0A0A"/>
-          <rect x="129" y="49" width="11" height="76" fill="#0A0A0A"/>
-          <rect x="140" y="49" width="11" height="76" fill="#0A0A0A"/>
-          <path d="M55 38 L18 75 L36 84 L55 66Z" fill="#FFD600" opacity="0.6"/>
-          <path d="M225 38 L262 75 L244 84 L225 66Z" fill="#FFD600" opacity="0.6"/>
-          <path d="M18 73 L36 82 L33 87 L15 78Z" fill="#0A0A0A"/>
-          <path d="M262 73 L244 82 L247 87 L265 78Z" fill="#0A0A0A"/>
-          <circle cx="98" cy="98" r="26" fill="#0A0A0A" stroke="#D4A017" stroke-width="2"/>
-          <text x="98" y="94" text-anchor="middle" font-family="Cairo" font-size="9" font-weight="900" fill="#D4A017">منارة</text>
-          <text x="98" y="107" text-anchor="middle" font-family="Cairo" font-size="6" font-weight="700" fill="#D4A017">العرائش</text>
-          <!-- City silhouette -->
-          <g fill="rgba(0,0,0,0.1)" transform="translate(0,190)">
-            <rect x="10" y="25" width="15" height="55"/>
-            <rect x="30" y="30" width="20" height="50"/>
-            <rect x="55" y="20" width="12" height="60"/>
-            <rect x="72" y="32" width="25" height="48"/>
-            <rect x="100" y="18" width="16" height="62"/>
-            <rect x="120" y="26" width="22" height="54"/>
-            <rect x="148" y="30" width="18" height="50"/>
-            <rect x="170" y="22" width="24" height="58"/>
-            <rect x="198" y="28" width="15" height="52"/>
-            <rect x="218" y="18" width="20" height="62"/>
-          </g>
-        </svg>
+        <img class="featured-jersey" src="images/jersey-yellow.jpg" alt="القميص الرسمي">
       </div>
 
       <div class="featured-info">
@@ -1404,15 +1378,7 @@
         <div class="product-badge new">جديد</div>
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
-          <svg width="180" height="200" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
-            <path d="M34 24 L10 48 L22 54 L22 170 L158 170 L158 54 L170 48 L146 24 Q133 11 120 14 Q96 5 90 8 Q74 5 60 14 Q47 11 34 24Z" fill="#1A1A1A" stroke="#D4A017" stroke-width="1.5"/>
-            <path d="M62 14 Q90 2 118 14 Q105 30 90 31 Q75 30 62 14Z" fill="#0A0A0A"/>
-            <rect x="83" y="31" width="7" height="50" fill="#D4A017"/>
-            <rect x="90" y="31" width="7" height="50" fill="#D4A017"/>
-            <circle cx="63" cy="62" r="16" fill="#0A0A0A" stroke="#D4A017" stroke-width="1.5"/>
-            <text x="63" y="60" text-anchor="middle" font-family="Cairo" font-size="6" fill="#D4A017" font-weight="700">منارة</text>
-            <text x="63" y="69" text-anchor="middle" font-family="Cairo" font-size="4" fill="#D4A017">العرائش</text>
-          </svg>
+          <img class="product-img" src="images/jersey-black.jpg" alt="قميص الملعب الأسود">
         </div>
         <div class="product-info">
           <div class="product-category">قمصان</div>
@@ -1433,13 +1399,7 @@
         <div class="product-badge sale">تخفيض</div>
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
-          <svg width="180" height="200" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
-            <path d="M34 24 L10 48 L22 54 L22 170 L158 170 L158 54 L170 48 L146 24 Q133 11 120 14 Q96 5 90 8 Q74 5 60 14 Q47 11 34 24Z" fill="#FFD600"/>
-            <path d="M62 14 Q90 2 118 14 Q105 30 90 31 Q75 30 62 14Z" fill="#0A0A0A"/>
-            <circle cx="63" cy="62" r="16" fill="#0A0A0A" stroke="#D4A017" stroke-width="1.5"/>
-            <text x="90" y="115" text-anchor="middle" font-family="Cairo" font-size="40" font-weight="900" fill="white" opacity="0.5">10</text>
-            <text x="90" y="148" text-anchor="middle" font-family="Cairo" font-size="7" font-weight="700" fill="rgba(0,0,0,0.5)">MANARA</text>
-          </svg>
+          <img class="product-img" src="images/tshirt-fan.jpg" alt="تيشيرت المشجعين">
         </div>
         <div class="product-info">
           <div class="product-category">تيشيرتات</div>
@@ -1460,17 +1420,7 @@
         <div class="product-badge">الأكثر مبيعاً</div>
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
-          <svg width="180" height="200" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
-            <path d="M34 24 L10 48 L22 54 L22 120 L158 120 L158 54 L170 48 L146 24 Q133 11 120 14 Q96 5 90 8 Q74 5 60 14 Q47 11 34 24Z" fill="#FFD600"/>
-            <path d="M62 14 Q90 2 118 14 Q105 30 90 31 Q75 30 62 14Z" fill="#0A0A0A"/>
-            <rect x="60" y="120" width="25" height="55" fill="#FFD600" rx="2"/>
-            <rect x="95" y="120" width="25" height="55" fill="#FFD600" rx="2"/>
-            <circle cx="63" cy="56" r="14" fill="#0A0A0A" stroke="#D4A017" stroke-width="1.5"/>
-            <text x="63" y="54" text-anchor="middle" font-family="Cairo" font-size="5" fill="#D4A017" font-weight="700">منارة</text>
-            <text x="63" y="62" text-anchor="middle" font-family="Cairo" font-size="3.5" fill="#D4A017">العرائش</text>
-            <rect x="75" y="31" width="6" height="44" fill="#0A0A0A" opacity="0.5"/>
-            <rect x="99" y="31" width="6" height="44" fill="#0A0A0A" opacity="0.5"/>
-          </svg>
+          <img class="product-img" src="images/kit-full.jpg" alt="طقم الملعب الكامل">
         </div>
         <div class="product-info">
           <div class="product-category">أطقم</div>
@@ -1490,14 +1440,7 @@
       <div class="product-card fade-up" onclick="openModal('قبعة النادي', 90, '—', 'قبعة رسمية لنادي منارة العرائش بالألوان الأسود والذهبي. مصنوعة من قطن عالي الجودة مع شعار النادي المطرز.')">
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
-          <svg width="180" height="160" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="90" cy="80" rx="75" ry="45" fill="#1A1A1A" stroke="#D4A017" stroke-width="1.5"/>
-            <path d="M15 80 Q90 30 165 80" fill="#FFD600"/>
-            <rect x="5" y="88" width="170" height="8" rx="4" fill="#0A0A0A"/>
-            <circle cx="90" cy="60" r="18" fill="#0A0A0A" stroke="#D4A017" stroke-width="1.5"/>
-            <text x="90" y="57" text-anchor="middle" font-family="Cairo" font-size="7" fill="#D4A017" font-weight="700">منارة</text>
-            <text x="90" y="67" text-anchor="middle" font-family="Cairo" font-size="5" fill="#D4A017">العرائش</text>
-          </svg>
+          <img class="product-img" src="images/cap.jpg" alt="قبعة النادي">
         </div>
         <div class="product-info">
           <div class="product-category">إكسسوارات</div>
@@ -1517,16 +1460,7 @@
       <div class="product-card fade-up" onclick="openModal('وشاح المشجعين', 80, '—', 'وشاح رسمي بألوان نادي منارة العرائش الأصفر والأسود، بشعار النادي واسمه. مثالي للمباريات والمناسبات الرياضية.')">
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
-          <svg width="180" height="160" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="60" width="160" height="40" rx="6" fill="#FFD600"/>
-            <rect x="10" y="60" width="160" height="8" rx="3" fill="#0A0A0A" opacity="0.4"/>
-            <rect x="10" y="92" width="160" height="8" rx="3" fill="#0A0A0A" opacity="0.4"/>
-            <rect x="10" y="68" width="40" height="24" fill="#0A0A0A" rx="2"/>
-            <text x="30" y="84" text-anchor="middle" font-family="Cairo" font-size="7" fill="#D4A017" font-weight="700">منارة</text>
-            <text x="90" y="85" text-anchor="middle" font-family="Cairo" font-size="11" font-weight="900" fill="rgba(0,0,0,0.3)">MANARA</text>
-            <rect x="130" y="68" width="40" height="24" fill="#0A0A0A" rx="2"/>
-            <text x="150" y="84" text-anchor="middle" font-family="Cairo" font-size="7" fill="#D4A017" font-weight="700">العرائش</text>
-          </svg>
+          <img class="product-img" src="images/scarf.jpg" alt="وشاح المشجعين">
         </div>
         <div class="product-info">
           <div class="product-category">إكسسوارات</div>
@@ -1546,15 +1480,7 @@
       <div class="product-card fade-up" onclick="openModal('حقيبة رياضية', 180, '', 'حقيبة رياضية رسمية بشعار نادي منارة العرائش. مساحة واسعة مع جيوب متعددة. مثالية لحمل معدات التدريب والمباريات.')">
         <div class="product-overlay"></div>
         <div class="product-img-placeholder">
-          <svg width="180" height="160" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="40" width="140" height="90" rx="12" fill="#1A1A1A" stroke="#D4A017" stroke-width="1.5"/>
-            <rect x="20" y="40" width="140" height="20" rx="10" fill="#FFD600"/>
-            <path d="M70 40 Q90 20 110 40" fill="none" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="90" cy="85" r="22" fill="#0A0A0A" stroke="#D4A017" stroke-width="1.5"/>
-            <text x="90" y="82" text-anchor="middle" font-family="Cairo" font-size="8" fill="#D4A017" font-weight="700">منارة</text>
-            <text x="90" y="93" text-anchor="middle" font-family="Cairo" font-size="5.5" fill="#D4A017">العرائش</text>
-            <line x1="20" y1="105" x2="160" y2="105" stroke="#D4A017" stroke-width="0.5" opacity="0.3"/>
-          </svg>
+          <img class="product-img" src="images/bag.jpg" alt="الحقيبة الرياضية">
         </div>
         <div class="product-info">
           <div class="product-category">حقائب</div>
